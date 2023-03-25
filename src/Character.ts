@@ -16,7 +16,7 @@ export default class Character implements Fighter {
   private _dexterity: number;
   private _energy: Energy;
 
-  constructor(name:string) {
+  constructor(name: string) {
     this._dexterity = numebrAlt;
     this._race = new Elf(name, this._dexterity);
     this._archetype = new Mage(name);
@@ -57,19 +57,18 @@ export default class Character implements Fighter {
   get energy(): Energy {
     return {
       type_: this._archetype.energyType,
-      amount: numebrAlt,
+      amount: this._energy.amount,
     };
   }
 
   receiveDamage(attackPoints: number): number {
     const damage = attackPoints - this._defense;
     if (damage > 0) {
-      this._lifePoints -= damage;  
+      this._lifePoints -= damage;
     }
-    if (damage <= 0) {
+    if (this._lifePoints <= 0) {
       this._lifePoints = -1;
     }
-
     return this._lifePoints;
   }
 
